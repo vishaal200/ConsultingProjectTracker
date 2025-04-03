@@ -3,6 +3,7 @@ import { useState, useRef } from "react";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faGooglePlusG } from "@fortawesome/free-brands-svg-icons";
 import "./Login.css";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -12,6 +13,7 @@ export default function Login() {
   const [isLoading, setLoading] = useState(false);
   const b1 = useRef(null);
   const b2 = useRef(null);
+  const navigate = useNavigate();
 
   const toggleMode = () => {
     setIsSignUp((prev) => !prev);
@@ -70,7 +72,7 @@ export default function Login() {
         throw new Error(errorMessage || "Signin failed");
       }
 
-      alert("Signin successful! 🎉");
+      navigate("/client");
     } catch (error) {
       alert(`Failed to signin: Invalid Credentials`);
     } finally {
@@ -123,6 +125,7 @@ export default function Login() {
               placeholder="Password"
               onChange={(ev) => setPassword(ev.target.value)}
             />
+
             {/* <a href="#">Forgot Your Password?</a> */}
             <button ref={b2} type="submit">
               Sign In
